@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{shop_detail.product}} {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{% load humanize %}
+
+<section class="single-product">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<ol class="breadcrumb">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'shop' %}">Shop</a></li>
+					<li class="active">{{shop_detail.product}}  </li>
+				</ol>
+			</div>
+		</div>
+		<div class="row mt-20">
+			<div class="col-md-5">
+				<div class="single-product-slider">
+					<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+						<div class='carousel-outer'>
+							<!-- me art lab slider -->
+							<div class='carousel-inner '>
+								<div class='item active'>
+									<img src='{{ shop_detail.product_photo.url }}' alt='' data-zoom-image="{{ shop.product_photo.url }}" />
+                                </div>
+                                {% if shop_detail.product_photo_1 %}
+								<div class='item'>
+									<img src='{{ shop_detail.product_photo_1.url }}' alt='' data-zoom-image="{{ shop_detail.product_photo_1.url }}" />
+                                </div>
+                                {% endif %}
+								{% if shop_detail.product_photo_2 %}
+								<div class='item'>
+									<img src='{{ shop_detail.product_photo_2.url }}' alt='' data-zoom-image="{{ shop_detail.product_photo_2.url }}" />
+                                </div>
+                                {% endif %}
+                                {% if shop_detail.product_photo_3 %}
+								<div class='item'>
+									<img src='{{ shop_detail.product_photo_3.url }}' alt='' data-zoom-image="{{ shop_detail.product_photo_3.url }}" />
+                                </div>
+                                {% endif %}
+                                {% if shop_detail.product_photo_4 %}
+								<div class='item'>
+									<img src='{{ shop_detail.product_photo_5.url }}' alt='' data-zoom-image="{{ shop_detail.product_photo_4.url }}" />
+                                </div>
+                                {% endif %}
+                                {% if shop_detail.product_photo_5 %}
+								<div class='item'>
+									<img src='{{ shop_detail.product_photo_6.url }}' alt='' data-zoom-image="{{ shop_detail.product_photo_5.url }}" />
+								</div>
+								{% endif %}
+							</div>
+							
+							<!-- sag sol -->
+							<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+								<i class="tf-ion-ios-arrow-left"></i>
+							</a>
+							<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+								<i class="tf-ion-ios-arrow-right"></i>
+							</a>
+						</div>
+						
+						<!-- thumb -->
+						<ol class='carousel-indicators mCustomScrollbar meartlab'>
+							<li data-target='#carousel-custom' data-slide-to='0' class='active'>
+								<img src='{{ shop_detail.product_photo.url }}' alt='' />
+                            </li>
+                            {% if shop_detail.product_photo_1 %}
+							<li data-target='#carousel-custom' data-slide-to='1'>
+								<img src='{{ shop_detail.product_photo_1.url }}' alt='' />
+                            </li>
+                            {% endif %}
+                            {% if shop_detail.product_photo_2 %}
+							<li data-target='#carousel-custom' data-slide-to='2'>
+								<img src='{{ shop_detail.product_photo_2.url }}' alt='' />
+                            </li>
+                            {% endif %}
+                            {% if shop_detail.product_photo_3 %}
+							<li data-target='#carousel-custom' data-slide-to='3'>
+								<img src='{{ shop_detail.product_photo_3.url }}' alt='' />
+                            </li>
+                            {% endif %}
+                            {% if shop_detail.product_photo_4 %}
+							<li data-target='#carousel-custom' data-slide-to='4'>
+								<img src='{{ shop_detail.product_photo_4.url }}' alt='' />
+                            </li>
+                            {% endif %}
+                            {% if shop_detail.product_photo_5 %}
+							<li data-target='#carousel-custom' data-slide-to='5'>
+								<img src='{{ shop_detail.product_photo_5.url }}' alt='' />
+                            </li>
+                            {% endif %}
+                            {% if shop_detail.product_photo_6 %}
+							<li data-target='#carousel-custom' data-slide-to='6'>
+								<img src='{{ shop_detail.product_photo_6.url }}' alt='' />
+                            </li>
+                            {% endif %}
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="single-product-details">
+					<h2>{{shop_detail.product}}</h2>
+					<p class="product-price">${{shop_detail.price | intcomma}}</p>
+					
+					<p class="product-description mt-20">
+						{{shop_detail.description | intcomma}}
+                    </p>
+					<div class="color-swatches">
+						<span>color:</span>
+						<ul>
+							<li>
+								<p class="product-color">{{shop_detail.color}}</p>
+							</li>
+						</ul>
+					</div>
+					<div class="product-quantity">
+						<span>Quantity:</span>
+						<div class="product-quantity-slider">
+							<input id="product-quantity" type="text" value="0" name="product-quantity">
+						</div>
+					</div>
+					<div class="product-category">
+						<span>Categories:</span>
+						<ul>
+							<li><a href="#">{{shop_detail.categories}}</a></li>
+						</ul>
+					</div>
+					<a href="cart.html" class="btn btn-main mt-20">Add To Cart</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="tabCommon mt-20">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a></li>
+					</ul>
+					<div class="tab-content patternbg">
+						<div id="details" class="tab-pane fade active in">
+							<h4>Product Description</h4>
+							<p>{{shop_detail.description | intcomma}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}

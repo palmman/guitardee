@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %} | Shop {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{% load humanize %}
+
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Shop</h1>
+					<ol class="breadcrumb">
+						<li><a href="{% url 'home' %}">Home</a></li>
+						<li class="active">shop</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="products section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="widget">
+					<h4 class="widget-title">Short By</h4>
+					<form method="post" action="{% url 'shop' %}">
+                        <select class="form-control">
+							{% for brand in brand_search %}
+							<option value="{{brand}}">{{brand}}</option>
+							{% endfor %}
+                        </select>
+                    </form>
+	            </div>
+				<div class="widget product-category">
+					<h4 class="widget-title">Categories</h4>
+					<div class="panel-group commonAccordion" id="accordion" role="tablist" aria-multiselectable="true">
+					  	<div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingOne">
+						      	<h4 class="panel-title">
+						        	<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Categories
+						        	</a>
+						      	</h4>
+						    </div>
+					    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<ul>
+									{% for categories in categories_search %}
+									<li><a href="{% url 'shop' %}">{{categories}}</a></li>
+									{% endfor %}
+								</ul>
+							</div>
+					    </div>
+					  </div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="row">	
+			{% for shop in shops %}	
+			<div class="col-md-4">
+				<div class="product-item">
+					<div class="product-thumb">
+						<!-- <span class="bage">Sale</span> -->
+						<img class="img-responsive"  src="{{ shop.product_photo.url }}" alt="product-img" style="min-height: 262px; max-height: 262px;"/>
+					</div>
+					<div class="product-content">
+						<h4><a href="{% url 'shop_single' shop.id %}">{{shop.product}}</a></h4>
+						<p class="price">${{ shop.price | intcomma }}</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+				</div>				
+			</div>
+		
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}
